@@ -1,39 +1,37 @@
 <template>
 <div id="app">
 	<img alt="Vue logo" src="./assets/logo.png">
-	<!--  <HelloWorld msg="Welcome to Your Vue.js App" />-->
 	<h1>Welcome in class enrollment system </h1>
 	
-	<p v-if="logged==true">Log in with e-mail 
-		<input v-model="email" type="text">
-		<button @click="login()">log in</button>
-		
-	</p>
-	<p v-else="logged-false">Witaj {{email}} !
-	<button @click="login()"> log out</button>
-	
-	</p>
-	
+	<div v-if="isAuthenticated">
+		Hello {{authenticatedUsername}}
+	</div>
+	<div v-else>
+		<login-form @login="logMeIn($event)" ></login-form>
+	</div>
 </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
 import "milligram";
+import LoginForm from './LoginForm.vue';
 export default 
 {
   	name: 'app',
   	components: 
   	{
-    	HelloWorld
+    	HelloWorld, 
+    	LoginForm
 	},
 	
 	data()
 	{
 		  return {
-			  email: 'Default mail',
-			  password: '',
-			  logged: true
+			password: '',
+			logged: true, 
+			authenticatedUsername: '',
+			isAuthenticated: false
 		  		};		  
 	},
 	methods: {
@@ -41,12 +39,12 @@ export default
 			alert(this.email);
 		},
 		login(){
-			if(this.logged){
-			this.logged= false
-			}
-			else{
-				this.logged= true
-			}
+				this.isAuthenticated= true
+				},
+			
+		logMeIn(username) {
+			  this.authenticatedUsername = username;
+			  this.login();
 			}
 	}
 }
