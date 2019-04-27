@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HelloWorld from './components/HelloWorld.vue';
+import "milligram";
 export default 
 {
   	name: 'app',
