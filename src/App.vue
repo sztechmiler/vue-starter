@@ -1,12 +1,17 @@
 <template>
 <div id="app">
 	<img alt="Vue logo" src="./assets/logo.png">
-	<HelloWorld msg="Welcome to Your Vue.js App" />
+	<!--  <HelloWorld msg="Welcome to Your Vue.js App" />-->
 	<h1>Welcome in class enrollment system </h1>
-	<p>Log in with e-mail 
+	
+	<p v-if="logged==true">Log in with e-mail 
 		<input v-model="email" type="text">
-		<button @moseover="login()">log in</button>
+		<button @click="login()">log in</button>
 		
+	</p>
+	<p v-else="logged-false">Witaj {{email}} !
+	<button @click="login()"> log out</button>
+	
 	</p>
 	
 </div>
@@ -26,8 +31,9 @@ export default
 	data()
 	{
 		  return {
-			  email: 'moj mail',
-			  password: ''		  
+			  email: 'Default mail',
+			  password: '',
+			  logged: true
 		  		};		  
 	},
 	methods: {
@@ -35,8 +41,13 @@ export default
 			alert(this.email);
 		},
 		login(){
-			email: ''
-		}
+			if(this.logged){
+			this.logged= false
+			}
+			else{
+				this.logged= true
+			}
+			}
 	}
 }
 
